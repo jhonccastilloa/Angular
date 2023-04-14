@@ -20,4 +20,11 @@ export class PeopleService {
       ? [...this.favoritePeople, person]
       : this.favoritePeople.filter((per) => per.id !== person.id);
   }
+
+  removeFavorite(person: Person) {
+    this.favoritePeople = this.favoritePeople.filter(
+      (per) => per.id !== person.id
+    );
+    return this.favoritePeople;
+  }
 }

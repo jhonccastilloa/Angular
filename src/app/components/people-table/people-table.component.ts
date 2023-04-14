@@ -4,7 +4,7 @@ import { Person } from './../../models/people.models';
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-people-table',
@@ -21,9 +21,10 @@ export class PeopleTableComponent implements AfterViewInit {
     'levelOfHappiness',
   ];
   dataSource!: MatTableDataSource<Person>;
-  @Input() isDataFavorite: boolean = false;
+  @Input() isDataFavorite: boolean = true;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(private peopleService: PeopleService) {}
 
@@ -33,10 +34,23 @@ export class PeopleTableComponent implements AfterViewInit {
         ? this.peopleService.favoritePeople
         : this.peopleService.newPeople
     );
+    if (this.isDataFavorite) {
+      this.displayedColumns = [
+        'id',
+        'name',
+        'category',
+        'company',
+        'levelOfHappiness',
+        'trash',
+      ];
+    }
   }
 
   handleFavorite(person: Person) {
     this.peopleService.addFavorite(person);
+  }
+  handleRemoveFavorite(person: Person) {
+    this.dataSource.data = this.peopleService.removeFavorite(person);
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
