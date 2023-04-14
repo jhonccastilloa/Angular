@@ -50,7 +50,7 @@
         Quitar de favoritos
       </th>
       <td mat-cell *matCellDef="let row">
-        <mat-icon (click)="handleRemoveFavorite(row); row.isChecked = false"
+        <mat-icon (click)="row.isChecked = false;handleRemoveFavorite(row) "
           >restore_from_trash</mat-icon
         >
       </td>
