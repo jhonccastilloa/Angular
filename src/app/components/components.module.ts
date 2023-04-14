@@ -10,11 +10,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ToolbarComponent, PeopleTableComponent],
   imports: [
     CommonModule,
+    FormsModule,
     MatToolbarModule,
     MatIconModule,
     MatTableModule,
@@ -23,6 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatInputModule,
     MatSortModule,
     MatDialogModule,
+    MatCheckboxModule,
   ],
   exports: [ToolbarComponent, PeopleTableComponent],
 })
